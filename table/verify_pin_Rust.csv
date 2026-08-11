@@ -1,0 +1,40 @@
+Version,      IP , Info  ,   0-order , 1-order   , 2-order   
+0,0," ti [l:8, bb:for_in_compare]                    ",0, 1 (mc:1)  ,0
+,1," ti [l:515, bb:check in compare]             ",0, 4 (mc:1)  , 26 (mc:2) 
+,2," ti [l:8, bb:_ZN70_$LT$core..option…] ",0, 3 (mc:1)  , 14 (mc:1) 
+,3," ti [l:21, bb:Try counter < 0]                    ",0,0,0
+,4," ti [l:24, bb:precompare]                         ",0, 1 (mc:1)  , 8 (mc:1)  
+1,0,"ti [l:8, bb:for_in_compare]",0,1 (mc:1),0
+,1,"ti [l:515, bb:check in compare]",0,0,0
+,2,"ti [l:515, bb:bb2.i]",0,4 (mc:1),22 (mc:2)
+,3,"ti [l:8, bb:_ZN70_$LT$core..option…]",0,3 (mc:1),10 (mc:1)
+,4,"ti [l:22, bb:Try counter < 0]",0,0,0
+2,0,"ti [l:10, bb:for_in_compare]",0,0,1 (mc:1)
+,1,"ti [l:17, bb:i!=size]",0,0,27 (mc:1)
+,2,"ti [l:515, bb:check in compare]",0,0,0
+,3,"ti [l:515, bb:bb2.i]",0,0,4 (mc:1)
+,4,"ti [l:12, bb:bb6.i]",0,0,4 (mc:1)
+,5,"ti [l:10, bb:bb13]",0,0,3 (mc:1)
+,6,"ti [l:35, bb:Try counter < 0]",0,0,0
+,7,"ti [l:38, bb:precompare]",0,0,15 (mc:1)
+,8,"ti [l:43, bb:bb9]",0,0,0
+4,0,"ti [l:13, bb:Try counter > 0]",0,0,0
+,1,"ti [l:34, bb:for loop]",0,0,1 (mc:1)
+,2,"ti [l:34, bb:bb23]",0,0,1 (mc:1)
+,3,"ti [l:34, bb:bb23.1]",0,0,1 (mc:1)
+,4,"ti [l:34, bb:bb23.2]",0,0,1 (mc:1)
+,5,"ti [l:42, bb:bb23.3]",0,0,0
+,6,"ti [l:47, bb:bb28]",0,0,34 (mc:1)
+,7,"ti [l:52, bb:bb33]",0,0,15 (mc:1)
+,8,"ti [l:61, bb:bb39]",0,0,15 (mc:1)
+,9,"ti [l:70, bb:bb47]",0,0,0
+6,0,"ti [l:10, bb:Try counter > 0]",0,0,0
+,1,"ti [l:18, bb:for loop]",0,0,1 (mc:1)
+,2,"ti [l:28, bb:i != PIN_SIZE]",0,0,12 (mc:1)
+,3,"ti [l:515, bb:user_pin != card_pin]",0,0,4 (mc:1)
+,4,"ti [l:21, bb:bb6.i]",0,0,4 (mc:1)
+,5,"ti [l:18, bb:bb16]",0,0,3 (mc:1)
+,6,"ti [l:34, bb:diff 1]",0,0,0
+,7,"ti [l:36, bb:diff 2]",0,0,0
+,8,"ti [l:48, bb:status 1]",0,0,0
+,9,"ti [l:51, bb:status 2]",0,0,0

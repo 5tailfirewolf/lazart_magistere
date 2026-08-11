@@ -1,0 +1,265 @@
+In this section, we first present the results obtained for the \texttt{memcmps} code.\\
+Next, we show the results for the \texttt{verify\_pin} code.\\
+Finally, we discuss the findings related to the control-flow graph generated during the analysis.
+%------------------------------------------------compare-----------------------------------------------
+\subsection{memcmps}
+\label{section:memcmps_result}
+This section presents the results for the \texttt{memcmps} test.
+
+\begin{table}[H]
+    \centering
+    \resizebox{0.4\textwidth}{!}{
+        \begin{tabular}{l|l|l|l|l|l}
+            \toprule
+            Version & IP & Info                & 0-order & 1-order  & 2-order    \\
+            \midrule
+            V1      & 0  & data [l:19, bb:bb0] & 0       & 4 (mc:1) & 20 (mc:1)  \\
+                    & 1  & ti [l:20, bb:bb0]   & 0       & 4 (mc:1) & 12 (mc:1)  \\
+                    & 2  & data [l:21, bb:bb1] & 0       & 0        & 8 (mc:1)   \\
+                    & 3  & data [l:23, bb:bb2] & 0       & 4 (mc:1) & 8 (mc:1)   \\
+                    & 4  & data [l:24, bb:bb3] & 0       & 4 (mc:1) & 16 (mc:1)  \\
+            \midrule
+            V2      & 0  & data [l:7, bb:bb0]  & 0       & 0        & 24 (mc:1)  \\
+                    & 1  & ti [l:7, bb:bb0]    & 0       & 0        & 8 (mc:1)   \\
+                    & 2  & data [l:9, bb:bb1]  & 0       & 0        & 14 (mc:1)  \\
+                    & 3  & data [l:10, bb:bb1] & 0       & 0        & 0          \\
+                    & 4  & ti [l:10, bb:bb1]   & 0       & 0        & 0          \\
+                    & 5  & data [l:12, bb:bb2] & 0       & 0        & 0          \\
+                    & 6  & data [l:13, bb:bb2] & 0       & 0        & 0          \\
+                    & 7  & ti [l:13, bb:bb2]   & 0       & 0        & 0          \\
+                    & 8  & data [l:14, bb:bb3] & 0       & 0        & 0          \\
+                    & 9  & data [l:19, bb:bb6] & 0       & 4 (mc:1) & 18 (mc:1)  \\
+            \midrule
+            V3      & 0  & data [l:7, bb:bb0]  & 0       & 0        & 24 (mc:1)  \\
+                    & 1  & ti [l:7, bb:bb0]    & 0       & 0        & 8 (mc:1)   \\
+                    & 10 & ti [l:13, bb:bb3]   & 0       & 0        & 0          \\
+                    & 11 & data [l:14, bb:bb4] & 0       & 0        & 0          \\
+                    & 12 & data [l:19, bb:bb8] & 0       & 4 (mc:1) & 18 (mc:1)  \\
+                    & 2  & data [l:8, bb:bb1]  & 0       & 0        & 14 (mc:1)  \\
+                    & 3  & data [l:9, bb:bb1]  & 0       & 0        & 0          \\
+                    & 4  & ti [l:9, bb:bb1]    & 0       & 0        & 0          \\
+                    & 5  & data [l:10, bb:bb2] & 0       & 0        & 0          \\
+                    & 6  & data [l:11, bb:bb2] & 0       & 0        & 0          \\
+                    & 7  & ti [l:11, bb:bb2]   & 0       & 0        & 0          \\
+                    & 8  & data [l:12, bb:bb3] & 0       & 0        & 0          \\
+                    & 9  & data [l:13, bb:bb3] & 0       & 0        & 0          \\
+            \bottomrule
+        \end{tabular}       
+        
+    }
+    \captionof{table}{Table of attack for memcmps in C}
+    \label{tab1:memcmps_C}
+\end{table}
+
+Table \ref{tab1:memcmps_C}: presents the attack found by Lazart for the code C.\\
+Version 1 (V1) uses one mask and one call to \texttt{memcmp}.\\
+Version 2 (V2) uses one mask and three calls to \texttt{memcmp}.\\
+Version 3 (V3) uses two masks and four calls to \texttt{memcmp}.\\
+Version 3 is also the one shown in Figure \ref{figure 1:memcmps_C}.\\
+In the Info column: data (modification of loaded values) and ti (test inversion) indicate the type of attack used.
+The attack are followed by the line in the code (l:int) and the block in control-flow graph (bb:name\_of\_block).\\
+The Order column corresponds to the number of fault injections introduced in a single attack.
+
+\begin{table}[H]
+    \centering
+    \resizebox{0.4\textwidth}{!}{
+        \begin{tabular}{l|l|l|l|l|l}
+            \toprule
+            Version & IP & Info                & 0-order & 1-order  & 2-order    \\
+            V1      & 0  & data [l:30, bb:start]       & 0       & 0        & 8 (mc:1)   \\
+                    & 1  & ti [l:8, bb:bb2.i]          & 0       & 0        & 4 (mc:1)   \\
+                    & 2  & ti [l:10, bb:bb4.i]         & 0       & 0        & 13 (mc:1)  \\
+                    & 3  & data [l:30, bb:memcmp.exit] & 0       & 4 (mc:1) & 25 (mc:1)  \\
+                    \midrule
+            V2      & 0  & data [l:24, bb:start]       & 0       & 4 (mc:1) & 60 (mc:1)  \\
+                    & 1  & ti [l:40, bb:bb2.i]         & 0       & 0        & 36 (mc:1)  \\
+                    & 10 & ti [l:42, bb:bb4.i15]       & 0       & 0        & 0          \\
+                    & 11 & ti [l:30, bb:memcmp.exit16] & 0       & 0        & 0          \\
+                    & 2  & ti [l:42, bb:bb4.i]         & 0       & 0        & 17 (mc:1)  \\
+                    & 3  & ti [l:24, bb:memcmp.exit]   & 0       & 0        & 8 (mc:1)   \\
+                    & 4  & data [l:36, bb:bb11]        & 0       & 4 (mc:1) & 35 (mc:1)  \\
+                    & 5  & data [l:26, bb:bb4]         & 0       & 0        & 22 (mc:1)  \\
+                    & 6  & ti [l:40, bb:bb2.i2]        & 0       & 0        & 16 (mc:1)  \\
+                    & 7  & ti [l:42, bb:bb4.i7]        & 0       & 0        & 0          \\
+                    & 8  & ti [l:27, bb:memcmp.exit8]  & 0       & 0        & 0          \\
+                    & 9  & ti [l:40, bb:bb2.i10]       & 0       & 0        & 16 (mc:1)  \\
+                    \midrule
+            V3      & 0  & data [l:24, bb:start]       & 0       & 4 (mc:1) & 76 (mc:1)  \\
+                    & 1  & ti [l:41, bb:bb2.i]         & 0       & 0        & 36 (mc:1)  \\
+                    & 10 & ti [l:43, bb:bb4.i15]       & 0       & 0        & 0          \\
+                    & 11 & ti [l:28, bb:memcmp.exit16] & 0       & 0        & 0          \\
+                    & 12 & ti [l:41, bb:bb2.i18]       & 0       & 0        & 16 (mc:1)  \\
+                    & 13 & ti [l:43, bb:bb4.i23]       & 0       & 0        & 0          \\
+                    & 14 & ti [l:30, bb:memcmp.exit24] & 0       & 0        & 0          \\
+                    & 2  & ti [l:43, bb:bb4.i]         & 0       & 0        & 17 (mc:1)  \\
+                    & 3  & ti [l:24, bb:memcmp.exit]   & 0       & 0        & 8 (mc:1)   \\
+                    & 4  & data [l:37, bb:bb14]        & 0       & 4 (mc:1) & 35 (mc:1)  \\
+                    & 5  & data [l:25, bb:bb4]         & 0       & 0        & 22 (mc:1)  \\
+                    & 6  & ti [l:41, bb:bb2.i2]        & 0       & 0        & 16 (mc:1)  \\
+                    & 7  & ti [l:43, bb:bb4.i7]        & 0       & 0        & 0          \\
+                    & 8  & ti [l:26, bb:memcmp.exit8]  & 0       & 0        & 0          \\
+                    & 9  & ti [l:41, bb:bb2.i10]       & 0       & 0        & 16 (mc:1)  \\
+            \bottomrule
+        \end{tabular}
+    }
+    \captionof{table}{Table of attack for memcmps in Rust}
+    \label{tab2:memcmps_Rust}
+    \end{table}
+
+\noindent Table \ref{tab2:memcmps_Rust}: show us the attack found by lazart for the code Rust.\\
+
+In Version 3,we observed that a single fault injection as create one attack at line 19 in Figure \ref{figure 1:memcmps_C} and at line 37 in Figure \ref{figure 2:memcmps_Rust}. Both attacks correspond to the return value of the function, which results in a mutation of the data stored in the \texttt{result} variable.
+However, we also noted that Version 3 exhibits fewer attacks in Rust (see Table \ref{tab2:memcmps_Rust}) compared to C (see Table \ref{tab1:memcmps_C}).An explanation for this discrepancy will be provided in Control-Flow graph (\ref{subsection:result cfg}) and Conclusion (\ref{section:Conclusion}) section.
+
+%------------------------------------------------verify_pin-----------------------------------------------
+\subsection{Verify pin}
+This section presents the results for the \texttt{verifypin} test.
+\begin{table}[ht]
+    \centering
+    \resizebox{0.4\textwidth}{!}{
+        \begin{tabular}{l|l|l|l|l|l} 
+            \toprule
+            Version & IP & Info                                       & 0-order & 1-order   & 2-order     \\ 
+            \midrule
+            0       & 0  & ti [l:8, bb:bb0]                           & 0       & 4 (mc:1)  & 6 (mc:1)    \\
+                    & 1  & ti [l:10, bb:check in compare]             & 0       & 4 (mc:1)  & 27 (mc:2)   \\
+                    & 2  & ti [l:20, bb:Try counter \textgreater{} 0] & 0       & 0         & 0           \\
+                    & 3  & ti [l:23, bb:precompare]                   & 0       & 4 (mc:1)  & 9 (mc:1)    \\ 
+            \midrule
+            1       & 0  & ti [l:8, bb:bb0]                           & 0       & 4 (mc:1)  & 6 (mc:1)    \\
+                    & 1  & ti [l:9, bb:bb1]                           & 0       & 4 (mc:1)  & 27 (mc:2)   \\
+                    & 2  & ti [l:20, bb:Try counter \textgreater{} 0] & 0       & 0         & 0           \\
+                    & 3  & ti [l:24, bb:precompare]                   & 0       & 4 (mc:1)  & 9 (mc:1)    \\
+                    & 4  & ti [l:27, bb:bb7]                          & 0       & 0         & 0           \\ 
+            \midrule
+            2       & 0  & ti [l:10, bb:bb0]                          & 0       & 0         & 4 (mc:1)    \\
+                    & 1  & ti [l:13, bb:check in compare]             & 0       & 4 (mc:1)  & 124 (mc:2)  \\
+                    & 2  & ti [l:19, bb:i!=size]                      & 0       & 0         & 4 (mc:1)    \\
+                    & 3  & ti [l:24, bb:diff in compare]              & 0       & 15 (mc:1) & 56 (mc:1)   \\
+                    & 4  & ti [l:37, bb:Try counter \textgreater{} 0] & 0       & 0         & 0           \\
+                    & 5  & ti [l:41, bb:precompare]                   & 0       & 15 (mc:1) & 56 (mc:1)   \\
+                    & 6  & ti [l:45, bb:bb8]                          & 0       & 0         & 0           \\ 
+            \midrule
+            4       & 0  & ti [l:12, bb:Try counter \textgreater{} 0] & 0       & 0         & 0           \\
+                    & 1  & ti [l:13, bb:bb0]                          & 0       & 0         & 0           \\
+                    & 10 & ti [l:53, bb:bb13]                         & 0       & 0         & 0           \\
+                    & 2  & ti [l:18, bb:bb1]                          & 0       & 0         & 0           \\
+                    & 3  & ti [l:29, bb:bb2]                          & 0       & 0         & 0           \\
+                    & 4  & ti [l:30, bb:bb3]                          & 0       & 4 (mc:1)  & 124 (mc:2)  \\
+                    & 5  & ti [l:35, bb:bb6]                          & 0       & 0         & 0           \\
+                    & 6  & ti [l:38, bb:bb7]                          & 0       & 0         & 0           \\
+                    & 7  & ti [l:41, bb:bb8]                          & 0       & 15 (mc:1) & 56 (mc:1)   \\
+                    & 8  & ti [l:47, bb:bb10]                         & 0       & 15 (mc:1) & 56 (mc:1)   \\
+                    & 9  & ti [l:48, bb:bb11]                         & 0       & 0         & 0           \\ 
+            \midrule
+            6       & 0  & ti [l:12, bb:Try counter \textgreater{} 0] & 0       & 0         & 0           \\
+                    & 1  & ti [l:19, bb:bb0]                          & 0       & 0         & 1 (mc:1)    \\
+                    & 2  & ti [l:22, bb:user\_pin != card\_pin]       & 0       & 0         & 0           \\
+                    & 3  & ti [l:28, bb:i != PIN\_SIZE]               & 0       & 0         & 1 (mc:1)    \\
+                    & 4  & ti [l:33, bb:diff 1]                       & 0       & 0         & 1 (mc:1)    \\
+                    & 5  & ti [l:36, bb:diff 2]                       & 0       & 0         & 1 (mc:1)    \\
+                    & 6  & ti [l:48, bb:status 1]                     & 0       & 0         & 1 (mc:1)    \\
+                    & 7  & ti [l:51, bb:status 2]                     & 0       & 0         & 1 (mc:1)    \\
+            \bottomrule
+        \end{tabular}
+    }
+    \captionof{table}{Table of attack for verifypin in C}
+    \label{tab3:verifypin_C}
+\end{table}
+\noindent Table \ref{tab3:verifypin_C}: present the attacks identified by Lazart for the code C.
+
+This table \ref{tab3:verifypin_C} is similar to the one discribed in the previous subsection \ref{section:memcmps_result}.
+But it corresponds to a different set of countermeasures implemented in \texttt{verify\_pin} test:
+\begin{itemize}
+        \item \textbf{Version 0} corresponds to \texttt{verify\_pin} which does not include any countermesure.
+        \item \textbf{Version 1} uses only hardened bool values.
+        \item \textbf{Version 2} combine a fixed-time loop with hardened boolean value.
+        \item \textbf{Version 4} introduced :
+        \begin{itemize}
+                \item An anticipated decrement of the \texttt{`try\_counter`} variable (try\_counter is performed in an separate conditional block).
+                \item A duplication of the \texttt{`try\_counter`} variable.
+                \item The two additional countermesures from Version 2.
+        \end{itemize}
+        \item \textbf{Version 6} combines :
+        \begin{itemize}
+                \item An anticipated decrement of the \texttt{`try\_counter`} variable.
+                \item A fixed-time loop.
+                \item Hardened boolean values.
+                \item Test duplication (the PIN is tested twice in two different blocks).
+        \end{itemize} 
+\end{itemize}
+
+%\onecolumn
+%\begin{multicols}{2}
+ 
+\begin{table}[H]
+    \centering
+    \resizebox{0.4\textwidth}{!}{
+        \begin{tabular}{l|l|l|l|l|l} 
+            \toprule
+            Version & IP & Info                                       & 0-order & 1-order  & 2-order    \\ 
+            \midrule
+            0       & 0  & ti [l:8, bb:for\_in\_compare]              & 0       & 1 (mc:1) & 0          \\
+                    & 1  & ti [l:515, bb:check in compare]            & 0       & 4 (mc:1) & 26 (mc:2)  \\
+                    & 2  & ti [l:8, bb:\_ZN70\_\$LT\$core..option…]   & 0       & 3 (mc:1) & 14 (mc:1)  \\
+                    & 3  & ti [l:21, bb:Try counter \textless{} 0]    & 0       & 0        & 0          \\
+                    & 4  & ti [l:24, bb:precompare]                   & 0       & 1 (mc:1) & 8 (mc:1)   \\ 
+            \midrule
+            1       & 0  & ti [l:8, bb:for\_in\_compare]              & 0       & 1 (mc:1) & 0          \\
+                    & 1  & ti [l:515, bb:check in compare]            & 0       & 0        & 0          \\
+                    & 2  & ti [l:515, bb:bb2.i]                       & 0       & 4 (mc:1) & 22 (mc:2)  \\
+                    & 3  & ti [l:8, bb:\_ZN70\_\$LT\$core..option…]   & 0       & 3 (mc:1) & 10 (mc:1)  \\
+                    & 4  & ti [l:22, bb:Try counter \textless{} 0]    & 0       & 0        & 0          \\ 
+            \midrule
+            2       & 0  & ti [l:10, bb:for\_in\_compare]             & 0       & 0        & 1 (mc:1)   \\
+                    & 1  & ti [l:17, bb:i!=size]                      & 0       & 0        & 27 (mc:1)  \\
+                    & 2  & ti [l:515, bb:check in compare]            & 0       & 0        & 0          \\
+                    & 3  & ti [l:515, bb:bb2.i]                       & 0       & 0        & 4 (mc:1)   \\
+                    & 4  & ti [l:12, bb:bb6.i]                        & 0       & 0        & 4 (mc:1)   \\
+                    & 5  & ti [l:10, bb:bb13]                         & 0       & 0        & 3 (mc:1)   \\
+                    & 6  & ti [l:35, bb:Try counter \textless{} 0]    & 0       & 0        & 0          \\
+                    & 7  & ti [l:38, bb:precompare]                   & 0       & 0        & 15 (mc:1)  \\
+                    & 8  & ti [l:43, bb:bb9]                          & 0       & 0        & 0          \\ 
+            \midrule
+            4       & 0  & ti [l:13, bb:Try counter \textgreater{} 0] & 0       & 0        & 0          \\
+                    & 1  & ti [l:34, bb:for loop]                     & 0       & 0        & 1 (mc:1)   \\
+                    & 2  & ti [l:34, bb:bb23]                         & 0       & 0        & 1 (mc:1)   \\
+                    & 3  & ti [l:34, bb:bb23.1]                       & 0       & 0        & 1 (mc:1)   \\
+                    & 4  & ti [l:34, bb:bb23.2]                       & 0       & 0        & 1 (mc:1)   \\
+                    & 5  & ti [l:42, bb:bb23.3]                       & 0       & 0        & 0          \\
+                    & 6  & ti [l:47, bb:bb28]                         & 0       & 0        & 34 (mc:1)  \\
+                    & 7  & ti [l:52, bb:bb33]                         & 0       & 0        & 15 (mc:1)  \\
+                    & 8  & ti [l:61, bb:bb39]                         & 0       & 0        & 15 (mc:1)  \\
+                    & 9  & ti [l:70, bb:bb47]                         & 0       & 0        & 0          \\ 
+            \midrule
+            6       & 0  & ti [l:10, bb:Try counter \textgreater{} 0] & 0       & 0        & 0          \\
+                    & 1  & ti [l:18, bb:for loop]                     & 0       & 0        & 1 (mc:1)   \\
+                    & 2  & ti [l:28, bb:i != PIN\_SIZE]               & 0       & 0        & 12 (mc:1)  \\
+                    & 3  & ti [l:515, bb:user\_pin != card\_pin]      & 0       & 0        & 4 (mc:1)   \\
+                    & 4  & ti [l:21, bb:bb6.i]                        & 0       & 0        & 4 (mc:1)   \\
+                    & 5  & ti [l:18, bb:bb16]                         & 0       & 0        & 3 (mc:1)   \\
+                    & 6  & ti [l:34, bb:diff 1]                       & 0       & 0        & 0          \\
+                    & 7  & ti [l:36, bb:diff 2]                       & 0       & 0        & 0          \\
+                    & 8  & ti [l:48, bb:status 1]                     & 0       & 0        & 0          \\
+                    & 9  & ti [l:51, bb:status 2]                     & 0       & 0        & 0          \\
+            \bottomrule
+        \end{tabular}
+    }
+    \captionof{table}{Table of attack for verifypin in Rust}
+    \label{tab4:verifypin_Rust}
+\end{table}
+\noindent Table \ref{tab4:verifypin_Rust}: present the attacks identified by Lazart for the Rust code.\\
+
+We observed similar results with \texttt{verify\_pin} test in both Table \ref{tab3:verifypin_C} and Table \ref{tab4:verifypin_Rust}.
+
+%------------------------------------------------CFG-----------------------------------------------
+
+       
+\subsection{Control Flow Graph}
+\label{subsection:result cfg}
+We also observed some major differences in how Rust compiles compared to C.\\
+The Intermediate code generated by LLVM revealed that Rust optimises certain conditional blocks differently than C.\\
+
+However, we noticed differences in the control-flow graphs generated by the two language versions of the code presented in this study.\\
+Specifically, Rust transforms variables with two possible values—depending on the evaluation of a condition, into a \texttt{select} instruction rather than a branch instruction.
+Similarly, Rust may use a \texttt{switch} instruction when a variable is compared to multiple values.

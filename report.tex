@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{todonotes}
+\usepackage[utf8]{inputenc}       % Encodage UTF-8
+\usepackage[T1]{fontenc}          % Meilleure gestion des polices
+\usepackage[french]{babel}
+\usepackage{report}
+\usepackage{float}
+%Marging
+\usepackage[left=2.5cm,        % Équivalent à \oddsidemargin et \evensidemargin = -0.25in
+    right=2.5cm,       % Marge droite (non spécifiée dans conference.sty, mais souvent symétrique)
+    top=2.5cm,         % Équivalent à \topmargin = -0.25in
+    bottom=2.5cm,      % Marge inférieure (non spécifiée dans conference.sty)
+    columnsep=0.635cm, % Équivalent à \columnsep = 0.25in
+    paperwidth=21.59cm, % Largeur standard d'une page A4 (21 cm) ou Letter (21.59 cm)
+    paperheight=27.94cm
+    %showframe,
+    ]{geometry}
+
+
+% multicol
+\usepackage{multicol}
+
+% biblio
+
+% figure
+\usepackage{graphicx}
+
+%caption
+\usepackage{caption}
+
+% itemize
+\usepackage{enumitem}
+
+\usepackage{booktabs}
+
+\usepackage{csvsimple}  
+\usepackage[sorting=none,backend=biber]{biblatex}
+\usepackage[colorlinks=true, linkcolor=red]{hyperref}  % pour liens cliquables
+\usepackage[en-US]{datetime2}
+\usepackage{csquotes}                 % Pour les citations complexes
+\addbibresource{reference.bib}
+
+
+\title{FIRLT : Fault Injection in Rust with Lazart Tool}
+\author{
+        Timothe Baleras
+        \\
+        \smallskip
+        Ensimag,UGA,Verimag
+        \\
+        \smallskip
+        timothe.baleras@grenoble-inp.org \\
+        \bigskip
+        Supervised by: Laurent Mounier,Etienne Boespflug
+        }
+\date{\today}
+
+\begin{document}
+\twocolumn
+\maketitle
+
+\DTMsetdatestyle{ddmmyyyy}
+{% Mosig student
+\fbox{\parbox{0.9\linewidth}{\small I understand what plagiarism entails and I declare that this report is my own, original work.\\   Baleras timothe, \today\space and signature:\\ \vspace{0.5cm} }}
+}
+
+%---------------------------Introduction---------------------------
+\section{Abstract}
+%\input{introduction/Abstract.tex}
+\todo[inline]{Remade Abstract}
+\section{Introduction}
+\input{introduction/introduction}
+
+\section{Related work}
+\input{introduction/Related_work}
+
+
+
+%--------------------------Core------------------------------------
+\section{Contribution}
+%\todo[inline]{Add discovery of rust ralated problem in rust + Redo the contribut not enough clear + add feature readded (graph normal and mutated)}
+\input{core/contribution.tex}
+
+\section{result}
+%\input{core/result.tex}
+\section{Conclusion}
+%\input{core/conclusion_limit}
+\onecolumn
+\section{Reference}
+\printbibliography[heading=none]
+
+
+
+%\input{Annex/annex_all.tex}
+
+\end{document}

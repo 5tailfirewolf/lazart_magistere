@@ -1,0 +1,32 @@
+Version,IP , Info                        ,   0-order , 1-order   , 2-order   
+V1,0," data [l:30, bb:start]       ",0,0, 8 (mc:1)  
+,1," ti [l:8, bb:bb2.i]          ",0,0, 4 (mc:1)  
+,2," ti [l:10, bb:bb4.i]         ",0,0, 13 (mc:1) 
+,3," data [l:30, bb:memcmp.exit] ",0, 4 (mc:1)  , 25 (mc:1) 
+V2,0," data [l:24, bb:start]       ",0, 4 (mc:1)  , 60 (mc:1) 
+,1," ti [l:40, bb:bb2.i]         ",0,0, 36 (mc:1) 
+,10," ti [l:42, bb:bb4.i15]       ",0,0,0
+,11," ti [l:30, bb:memcmp.exit16] ",0,0,0
+,2," ti [l:42, bb:bb4.i]         ",0,0, 17 (mc:1) 
+,3," ti [l:24, bb:memcmp.exit]   ",0,0, 8 (mc:1)  
+,4," data [l:36, bb:bb11]        ",0, 4 (mc:1)  , 35 (mc:1) 
+,5," data [l:26, bb:bb4]         ",0,0, 22 (mc:1) 
+,6," ti [l:40, bb:bb2.i2]        ",0,0, 16 (mc:1) 
+,7," ti [l:42, bb:bb4.i7]        ",0,0,0
+,8," ti [l:27, bb:memcmp.exit8]  ",0,0,0
+,9," ti [l:40, bb:bb2.i10]       ",0,0, 16 (mc:1) 
+V3,0," data [l:24, bb:start]       ",0, 4 (mc:1)  , 76 (mc:1) 
+,1," ti [l:41, bb:bb2.i]         ",0,0, 36 (mc:1) 
+,10," ti [l:43, bb:bb4.i15]       ",0,0,0
+,11," ti [l:28, bb:memcmp.exit16] ",0,0,0
+,12," ti [l:41, bb:bb2.i18]       ",0,0, 16 (mc:1) 
+,13," ti [l:43, bb:bb4.i23]       ",0,0,0
+,14," ti [l:30, bb:memcmp.exit24] ",0,0,0
+,2," ti [l:43, bb:bb4.i]         ",0,0, 17 (mc:1) 
+,3," ti [l:24, bb:memcmp.exit]   ",0,0, 8 (mc:1)  
+,4," data [l:37, bb:bb14]        ",0, 4 (mc:1)  , 35 (mc:1) 
+,5," data [l:25, bb:bb4]         ",0,0, 22 (mc:1) 
+,6," ti [l:41, bb:bb2.i2]        ",0,0, 16 (mc:1) 
+,7," ti [l:43, bb:bb4.i7]        ",0,0,0
+,8," ti [l:26, bb:memcmp.exit8]  ",0,0,0
+,9," ti [l:41, bb:bb2.i10]       ",0,0, 16 (mc:1) 

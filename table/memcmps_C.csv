@@ -1,0 +1,29 @@
+Version,IP,Info,0-order,1-order,2-order   
+V1,0," data [l:19, bb:bb0] ",0, 4 (mc:1)  , 20 (mc:1) 
+V1,1," ti [l:20, bb:bb0]   ",0, 4 (mc:1)  , 12 (mc:1) 
+V1,2," data [l:21, bb:bb1] ",0,0, 8 (mc:1)  
+V1,3," data [l:23, bb:bb2] ",0, 4 (mc:1)  , 8 (mc:1)  
+V1,4," data [l:24, bb:bb3] ",0, 4 (mc:1)  , 16 (mc:1) 
+V2,0," data [l:7, bb:bb0]  ",0,0, 24 (mc:1) 
+V2,1," ti [l:7, bb:bb0]    ",0,0, 8 (mc:1)  
+V2,2," data [l:9, bb:bb1]  ",0,0, 14 (mc:1) 
+V2,3," data [l:10, bb:bb1] ",0,0,0
+V2,4," ti [l:10, bb:bb1]   ",0,0,0
+V2,5," data [l:12, bb:bb2] ",0,0,0
+V2,6," data [l:13, bb:bb2] ",0,0,0
+V2,7," ti [l:13, bb:bb2]   ",0,0,0
+V2,8," data [l:14, bb:bb3] ",0,0,0
+V2,9," data [l:19, bb:bb6] ",0, 4 (mc:1)  , 18 (mc:1) 
+V3,0," data [l:7, bb:bb0]  ",0,0, 24 (mc:1) 
+V3,1," ti [l:7, bb:bb0]    ",0,0, 8 (mc:1)  
+V3,10," ti [l:13, bb:bb3]   ",0,0,0
+V3,11," data [l:14, bb:bb4] ",0,0,0
+V3,12," data [l:19, bb:bb8] ",0, 4 (mc:1)  , 18 (mc:1) 
+V3,2," data [l:8, bb:bb1]  ",0,0, 14 (mc:1) 
+V3,3," data [l:9, bb:bb1]  ",0,0,0
+V3,4," ti [l:9, bb:bb1]    ",0,0,0
+V3,5," data [l:10, bb:bb2] ",0,0,0
+V3,6," data [l:11, bb:bb2] ",0,0,0
+V3,7," ti [l:11, bb:bb2]   ",0,0,0
+V3,8," data [l:12, bb:bb3] ",0,0,0
+V3,9," data [l:13, bb:bb3] ",0,0,0
