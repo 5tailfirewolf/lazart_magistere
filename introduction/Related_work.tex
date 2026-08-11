@@ -46,6 +46,8 @@ Lazart can support 4 fault models:
     \item Call another function (function switch);
 \end{itemize}
 
+\todo[inline]{under new section}
+
 \subsection{Rust Language}
 Rust is a general-purpose programming language which emphasizes performance, type safety, concurrency, and memory safety.
 Rust has is first version released in 2006.
@@ -63,6 +65,12 @@ We give several reason of using rust:
 
 \subsubsection{The usage of no\_std}
 One point that need to be explain on this reporte is the flag no\_std.
-Using no\_std, block acces to some core of rust language.
+Using no\_std attribute stops the compiler from linking std into the crate, and only links core.
+It limit :
+\begin{itemize}
+    \item Heap allocation.
+    \item File I/O, threading, and networking.
+    \item Many common traits and types (e.g., std::io::Error).
+\end{itemize}
 
-\todo[inline]{why and how work the no\_std flag}
+\todo[inline]{below new section}
