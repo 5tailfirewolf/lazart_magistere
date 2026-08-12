@@ -1,4 +1,5 @@
-\todo[inline]{introduction Remade}
+\todo[inline]{introduction Remade : introduction of fault injection + Rust and Contribution}
+\subsection{Fault injection}
 In computer science, many types of faults can cause the system to behave unexpectedly.
 Faults may occur during development or execution of the program and can originate from the software, hardware or both.
 Faults come in a wide variety, they can be syntax errors that cause the script to fail to compile, generated warnings, or crashed with an error during compilation.
@@ -10,8 +11,35 @@ It can occur accidentally, for example due to cosmic rays, or deliberately by a 
 To deal with fault injection, developers use several countermeasures \cite{dureuil2016,liu2025,Richter-Brockmann2021} or tools \cite{Arlat1990,Arribas2020,1_Segall1995,pensec2024} to protect their programs.
 One such tool is called Lazart\cite{Lazart2015}. It's a multi-fault injection tool, that mutate the code at the LLVM, in order to simulate the effects of fault injection attacks.
 
-Originally, Lazart only supported C code, but support for Rust is now being implemented. 
-In previous work, a countermeasure benchmark was implemented and evaluated in C \cite{dureuil2016}.
+\subsection{Rust}
 
-The purpose of this study is to evaluate Fault injection on Rust code and to compare its results with the ones obtained with C on a representative benchmark.
-Another question addressed in this study, whether there is a way to protect fault injection countermeasures from compiler optimisations, and how much effectiveness remains after the optimisation.
+Rust language is a recent language and defining to be a succesor of C and C++;
+while C/C++ have a lot of memory access bug such as buffer overflow or Data races issue.
+
+Rust have more stronger protection over memory access and concurrency over variable, variable are track with an element call the borrow checker that track the lifespan and ownership as well there acces.
+While the borrow checker protect bad acces of data on the software program. 
+
+The same cannot be said with the hardware failure. that may cause some protection to be counter.
+
+\todo[inline]{add exemple ?}
+
+
+\subsection{Contribution}
+ 
+The purpose of this report is to show how Rust differ with C and C++ regarding offensive fault injection.
+To answer that there three different part :
+
+\begin{itemize}
+    \item \textbf{Extand Lazart to support Rust}
+    \item \textbf{Porting the FISSC benchmark to Rust}
+    \item \textbf{Analyzing idiomatic Rust}
+\end{itemize}
+
+\todo[inline]{explain more ?}
+
+%Originally, Lazart only supported C code, but support for Rust is now being implemented. 
+%In previous work, a countermeasure benchmark was implemented and evaluated in C \cite{dureuil2016}.
+
+%The purpose of this study is to evaluate Fault injection on Rust code and to compare its results with the ones obtained with C on a representative benchmark.
+%Another question addressed in this study, whether there is a way to protect fault injection countermeasures from compiler optimisations, and how much effectiveness remains after the optimisation.
+
