@@ -1,0 +1,23 @@
+Some modification have been made in order to support the Rust language.
+
+\subsubsection{Limitation of Lazart for Rust}
+
+Although Lazart works on LLVM and rustc is capable of producing LLVM,Some limitation where encountered, when trying to analyze Rust programmers with lazart.
+
+\textbf{LLVM version.} The LLVM version of Lazart was up dated from LLVM 9 to LLVM 14, as the Rust toolchain matching LLVM 9 si too old for cargo to fetch crates from registry.
+
+\textbf{Test inversion extension.} rustc makes an extensive use of LLVM's \texttt{select} and \texttt{switch} instructions compared to C compilers (here \texttt{clang}).
+Rust is capable to generate \texttt{switch} and \texttt{select} from simple branching (exemple: condition branch), even if the \texttt{switch} instructions is often use for pattern matching.
+The test inversion model has been extended to support \texttt{switch} and \texttt{select} LLVM instructions in order to be able to fault some control flow constructs (to match C example in FISSC) or some language constructs (e.g. pattern matching). 
+
+\subsubsection{The Change Pointer fault model extansion}
+
+A new form of attack as been added.
+Since Rust borrow checker guarentees safety at compiled time. Nothing guarentees those safety to protected at run-time are they are purely static.
+Since developpers rely on the borrow checker for there program and to enable optimisation. One way to break the borrow checker guarentees is to consider a fault model of \textit{change pointer} making possible to redirect a mutable reference to another.
+This fault is made possible with the help of the \texttt{unsafe} keyword.
+At lower representation levels, the fault can map a skip on an address computation, or a fault on a register or the stack.
+
+\textbf{Change Pointer fault model} The Change Pointer (CP) fault model implemented in Lazart for Rust and C, redirects a reference so that it point to another object.
+Fault yielding a dangling or wild pointer are out of scope due to them raising a trap and become easly detectable.
+A redirection between two legitimate references is silent and is exactly what defeats a borrow checker invariant.
