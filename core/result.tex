@@ -1,0 +1,113 @@
+\label{result section}
+In this section, we first present the results obtained for the \texttt{memcmps} code.\\
+Next, we show the results for the \texttt{verify\_pin} code.\\
+Finally, we discuss the findings related to the control-flow graph generated during the analysis.
+
+%------------------------------------------------verify_pin-----------------------------------------------
+\subsection{Verify pin}
+This section presents the results for the \texttt{verifypin} test.
+
+\begin{table*}[t]
+\centering
+\begin{tabular}{l|llll|llll|l}
+Version    & \multicolumn{4}{c|}{Attacks} & \multicolumn{4}{c|}{Non-redundant attacks} & Countermeasures \\
+           & 1F & 2F & 3F & 4F & 1F & 2F & 3F & 4F &                 \\
+\hline
+\hline
+VP0        & 12 & 21  & 18  & 7    & 12 & 0  & 0   & 0   & $\emptyset$           \\
+VP0 - rust & 8  & 20  & 20  & 10   & 8  & 0  & 0   & 0   & $\emptyset$           \\
+\hline
+VP1        & 12 & 21  & 18  & 7    & 12 & 0  & 0   & 0   & HB                    \\
+VP1 - rust & 12 & 21  & 18  & 7    & 12 & 0  & 0   & 0   & HB                    \\
+\hline
+VP2        & 34 & 122 & 204 & 183  & 34 & 4  & 0   & 0   & HB+FTL                \\
+VP2 - rust & 34 & 122 & 204 & 183  & 34 & 4  & 0   & 0   & HB+FTL                \\
+\hline
+VP3        & 35 & 122 & 204 & 183  & 35 & 4  & 0   & 0   & HB+FTL+INL            \\
+VP3 - rust & 35 & 122 & 204 & 183  & 35 & 4  & 0   & 0   & HB+FTL+INL            \\
+\hline
+VP4        & 34 & 118 & 180 & 147  & 34 & 0  & 4   & 0   & FTL+INL+DPTC+PTCBK+LC \\
+VP4 - rust & 34 & 118 & 180 & 147  & 34 & 0  & 4   & 0   & FTL+INL+DPTC+PTCBK+LC \\
+\hline
+VP5        & 0  & 80  & 644 & 2566 & 0  & 80 & 248 & 184 & HB+FTL+DPTC+DC        \\
+VP5 - rust & 0  & 80  & 644 & 2566 & 0  & 80 & 248 & 184 & HB+FTL+DPTC+DC        \\
+\hline
+VP6        & 0  & 3   & 9   & 20   & 0  & 3  & 9   & 14  & HB+FTL+INL+DPTC+DT    \\
+VP6 - rust & 0  & 3   & 9   & 20   & 0  & 3  & 9   & 20  & HB+FTL+INL+DPTC+DT    \\
+\hline
+VP7        & 1  & 2   & 8   & 13   & 1  & 2  & 8   & 13  & HB+FTL+INL+DPTC+DT+SC \\
+VP7 - rust & 1  & 2   & 8   & 13   & 1  & 2  & 8   & 13  & HB+FTL+INL+DPTC+DT+SC
+\end{tabular}
+    \caption{Comparison of attacks between \texttt{verify\_pin} implementations \label{tbl:results-fissc-vp}}
+\end{table*}
+
+\noindent Table \ref{tbl:results-fissc-vp}: present the attacks identified by Lazart for the code C and Rust.
+The column "Version" indicates the version of the program and the implementation language. 
+The second to fifth columns correspond respectively to the number of attacks reported by Lazart for 1 fault to 4 faults.
+Similarly, the next four columns present the number of \textit{non-redundant} attacks for 1 fault to 4 faults. 
+The last column "Countermeasures" enumerates the protection used for each version (the protection are the same for version X and it's Rust counter part):
+\begin{itemize}
+        \item \textit{HB} : hardened boolean
+        \item \textit{FTL} : fixed time loops
+        \item \textit{INL} : inlined function
+        \item \textit{DPTC} : try counter decremented first
+        \item \textit{PTCBK} : try counter backup
+        \item \textit{LC} : loop counter verification
+        \item \textit{DC} : double call
+        \item \textit{DT} : double test
+        \item \textit{SC} : step counter
+\end{itemize}
+\todo[inline]{explain different value}
+
+In the VP0 example, we observe 8 missing attacks when we compare to the C result.Since VP0 doesn't have hardened boolean, so it use regular boolean, \texttt{rustc} reuse the branch condition in the \texttt{verify\_pin} function, through xor opterations, to compute its return value, reducing the number of observable injection points on that path. All the higher-order attacks are redundant with those 8 one fault attacks.
+
+The \textit{redundancy analysis} regroups attacks that are variations of a simpler attack adding additional faults.
+
+In the VP6 example, the non-redundant attacks count differs in 4-fault(while being the same without redundancy analysis) because \texttt{rustc} places some injection points earlier in the control flow. The IPs are therefore identified as the non-redundant ones, which changes the higher-order results.
+%------------------------------------------------memcompare-----------------------------------------------
+\subsection{memcmps}
+\label{section:memcmps_result}
+This section presents the results for the \texttt{memcmps} test.
+
+\begin{table*}[t]
+\centering
+\begin{tabular}{l|llll|llll}
+Version      & \multicolumn{4}{c|}{Attacks} & \multicolumn{4}{c}{Non-redundant attacks} \\
+             & 1F & 2F & 3F & 4F & 1F & 2F & 3F & 4F \\
+\hline
+\hline
+MCMPS1        & 16  & 32  & 28  & 8  & 16  & 0  & 0  & 0  \\
+MCMPS1 - rust & 16  & 32  & 28  & 8  & 16  & 0  & 0  & 0  \\
+\hline
+MCMPS2        & 4  & 32  & 404  & 1400 & 4  & 32  & 322  & 194  \\
+MCMPS2 - rust & 4  & 32  & 404  & 1400 & 4  & 32  & 322  & 194  \\
+\hline
+MCMPS3        & 4  & 32  & 216  & 2262   & 4  & 32  & 134  & 1468  \\
+MCMPS3 - rust & 4  & 32  & 216  & 2262   & 4  & 32  & 134  & 1468  \\
+\end{tabular}
+\caption{Comparison of attacks between \texttt{memcmps} implementations \label{tbl:results-fissc-mcmp}}
+\end{table*}
+
+Table \ref{tbl:results-fissc-mcmp} indicates for each version and implementation language (first column "Version") the results obtained for 1 to 4 faults - as for Table \ref{tbl:results-fissc-vp}, the column "Attacks" shows attacks count while the "Non-redundant attacks" column shows the subset of non-redundant attacks.
+
+
+Table \ref{tbl:results-fissc-mcmp}: presents the attack found by Lazart for the code C and Rust.\\
+Version 1 (V1) uses one mask and one call to \texttt{memcmp}.\\
+Version 2 (V2) uses one mask and three calls to \texttt{memcmp}.\\
+Version 3 (V3) uses two masks and four calls to \texttt{memcmp}.\\
+Version 3 is also the one shown in Figure \ref{tbl:results-fissc-mcmp}.\\
+
+As shown on the table \ref{tbl:results-fissc-mcmp}, the rust implementation behave exactly as the C implementation, showing the same result for 1 to 4 faults with combination of TI and DL fault models.
+
+
+%------------------------------------------------CFG-----------------------------------------------
+
+       
+\subsection{Control Flow Graph}
+\label{subsection:result cfg}
+We also observed some major differences in how Rust compiles compared to C.\\
+The Intermediate code generated by LLVM revealed that Rust optimises certain conditional blocks differently than C.\\
+
+However, we noticed differences in the control-flow graphs generated by the two language versions of the code presented in this study.\\
+Specifically, Rust transforms variables with two possible values—depending on the evaluation of a condition, into a \texttt{select} instruction rather than a branch instruction.
+Similarly, Rust may use a \texttt{switch} instruction when a variable is compared to multiple values.

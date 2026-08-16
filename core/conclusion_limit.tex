@@ -1,0 +1,13 @@
+\label{section:Conclusion}
+The first point of the report was to port Rust language in lazart.Lazart is now capable of analising Rust program and be able to fault \texttt{select} and \texttt{switch} instruction.
+
+On the second point of the article there is now the possible to generated control flow graph of the code generated.The code generated could be the mutated or from the compile program.The use of cfg show that \texttt{rustc} use \texttt{select} and \texttt{switch} rather then normal conditional bloc arkitecture.
+
+And finally on the last section, show that we almost get the same attack fault between both language with \texttt{verify\_pin} and \texttt{memcmps}.
+the minor different are cause by rust using the result of the condition with the help of xor to return the value in \texttt{verify\_pin} 0 and the lost of some attacks in the version 6 of \texttt{verify\_pin}, due to the attack not being in the same places than in C.
+However it show that the rust ported in lazart is reliable and can be trusted.
+Further more an idiomatic version of FISSC as been added, to be more closer of what a reel programmers in rust will have done.
+
+Even if Successfull version of lazart working with rust there is still element to improve and issue to be fix, one of them would be the panic function that cause klee to fall in a infinite loop or the use of intrassic optimisation instruction (optimisation done at runtime) done by the LLVM.
+ 
+%\end{multicols}

@@ -1,0 +1,13 @@
+In this section we talk of a new option feature of lazart.
+The possiblility of generated control flow graph from the normal or mutated version.
+%--------------------------------------------------------------CFG--------------------------------------------------------------------------------
+\subsection{Control flow graph}
+Reminder: A Control Flow Graph is a representation, using graph notation, of all paths that might be traversed through a function during its execution, or control flow.
+We generated a control flow graph from the generated LLVM code, which is stored in ".ll" file.
+
+With Lazart, it is also possible to generate a control flow graph from the mutated code produced from Wolverine or from the program compiled.
+We used the control-flow graphs to identify and compare the instructions used for each language ( C and Rust ) in order to understand their differences.\\
+
+See the example in the appendix A in Figure \ref{fig:annexe1}.
+
+The control flow graph was primarly use to understand optimisation of \texttt{rustc} with their own boolean and give an additional explaination of one of the findings with Table \ref{tbl:results-fissc-vp} :\texttt{verify\_pin} (see below in section \ref{FISSC}) in the section \ref{result section}.
