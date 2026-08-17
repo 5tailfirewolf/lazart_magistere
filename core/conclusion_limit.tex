@@ -1,13 +1,13 @@
 \label{section:Conclusion}
-The first point of the report was to port Rust language in lazart.Lazart is now capable of analising Rust program and be able to fault \texttt{select} and \texttt{switch} instruction.
+The first point of the report was to port the Rust language in Lazart. Lazart is now capable of analyzing Rust programs and being able to fault \texttt{select} and \texttt{switch} instructions.
 
-On the second point of the article there is now the possible to generated control flow graph of the code generated.The code generated could be the mutated or from the compile program.The use of cfg show that \texttt{rustc} use \texttt{select} and \texttt{switch} rather then normal conditional bloc arkitecture.
+On the second point of the article, there is now the possibility to generate a control flow graph of the code generated. The code generated could be the mutated one or from the compiled program. The use of cfg shows that \texttt{rustc} uses \texttt{select} and \texttt{switch} rather than normal conditional block architecture.
 
-And finally on the last section, show that we almost get the same attack fault between both language with \texttt{verify\_pin} and \texttt{memcmps}.
-the minor different are cause by rust using the result of the condition with the help of xor to return the value in \texttt{verify\_pin} 0 and the lost of some attacks in the version 6 of \texttt{verify\_pin}, due to the attack not being in the same places than in C.
-However it show that the rust ported in lazart is reliable and can be trusted.
-Further more an idiomatic version of FISSC as been added, to be more closer of what a reel programmers in rust will have done.
+And finally, in the last section, show that we almost get the same attack fault between both languages with \texttt{verify\_pin} and \texttt{memcmps}.
+The minor differences are caused by Rust using the result of the condition with the help of XOR to return the value in \texttt{verify\_pin} 0 and the loss of some attacks in version 6 of \texttt{verify\_pin}, due to the attack not being in the same places as in C.
+However, it shows that the rust ported in Lazart is reliable and can be trusted.
+Furthermore, an idiomatic version of FISSC has been added to be closer to what a real programmer in Rust will have done.
 
-Even if Successfull version of lazart working with rust there is still element to improve and issue to be fix, one of them would be the panic function that cause klee to fall in a infinite loop or the use of intrassic optimisation instruction (optimisation done at runtime) done by the LLVM.
+Even if a successful version of Lazart is working with Rust, there are still elements to improve and issues to be fixed, one of them would be the panic function that causes Klee to fall into an infinite loop or the use of intrinsic optimization instructions (optimizations done at runtime) done by the LLVM.
  
 %\end{multicols}

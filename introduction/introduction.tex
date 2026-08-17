@@ -1,40 +1,40 @@
 \subsection{Fault injection}
-In computer science, many types of faults can cause the system to behave unexpectedly.
-Faults may occur during development or execution of the program and can originate from the software, hardware or both.
-Faults come in a wide variety, they can be syntax errors that cause the script to fail to compile, generated warnings, or crashed with an error during compilation.
-Faults can be caused by human errors, misconfiguration that were not anticipated, or malicious individuals exploiting security vulnerabilities.
+In computer science, many types of faults can cause a system to behave unexpectedly.
+Faults may occur during the development or execution of a program and can originate from the software, the hardware, or both.
+Faults come in a wide variety: they can be syntax errors that cause the script to fail to compile, generated warnings, or crashes with an error during compilation.
+Faults can be caused by human error, misconfigurations that were not anticipated, or malicious individuals exploiting security vulnerabilities.
 One important type of fault is \textbf{fault injection}.
-Fault injection has been around for a long time, and we found traces of paper dating from 1970s but there were never published, the oldest one published is in 1995 \cite{1_Segall1995}.
-This fault can be caused by various techniques, including hardware such as clock glitch \cite{15obermaier2017fuzzy,16korak2014effects}, voltage glitch \cite{11zussa2012investigation, 12zussa2014analysis, 13selmane2011security}, laser \cite{17selmke2016precise, 18dutertre2018laser}, or electromagnetic fault \cite{19dehbaoui2012injection, 20dehbaoui2012electromagnetic}, as well as software such as Rowhammer \cite{14kim2014flipping}.
-It can occur accidentally, for example due to cosmic rays, or deliberately by a mischievous individual, in the latter case, we talk about a fault injection attack.
+Fault injection has been around for a long time, and we found traces of papers dating from the 1970s, but they were never published; the oldest one published is from 1995 \cite{1_Segall1995}.
+This fault can be caused by various techniques, including hardware, such as clock glitches \cite{15obermaier2017fuzzy,16korak2014effects}, voltage glitches \cite{11zussa2012investigation, 12zussa2014analysis, 13selmane2011security}, laser \cite{17selmke2016precise, 18dutertre2018laser}, or electromagnetic faults \cite{19dehbaoui2012injection, 20dehbaoui2012electromagnetic}, as well as software, such as Rowhammer \cite{14kim2014flipping}.
+It can occur accidentally, for example due to cosmic rays, or deliberately by a mischievous individual; in the latter case, we talk about a fault injection attack.
 To deal with fault injection, developers use several countermeasures \cite{dureuil2016,liu2025,Richter-Brockmann2021} or tools \cite{Arlat1990,Arribas2020,1_Segall1995,pensec2024} to protect their programs.
-One such tool is called Lazart\cite{Lazart2015}. It's a multi-fault injection tool, that mutate the code at the LLVM, in order to simulate the effects of fault injection attacks.
+One such tool is called Lazart\cite{Lazart2015}. It is a multi-fault injection tool that mutates the code at the LLVM level in order to simulate the effects of fault injection attacks.
 
 \subsection{Rust}
 
-Rust language is a recent language and defining to be a succesor of C and C++;
-while C/C++ have a lot of memory access bug such as buffer overflow or Data races issue.
+The Rust language is a recent language defined as a successor to C and C++;
+while C/C++ have a lot of memory access bugs such as buffer overflows or data race issues.
 
-Rust have more stronger protection over memory access and concurrency over variable, variable are track with an element call the borrow checker that track the lifespan and ownership as well there acces.
-While the borrow checker protect bad acces of data on the software program. 
+Rust has stronger protection over memory access and concurrency over variables; variables are tracked with an element called the borrow checker that tracks the lifespan and ownership, as well as their access.
+While the borrow checker protects against bad access of data in the software program. 
 
-The same cannot be said with the hardware failure. that may cause some protection to be counter.
+The same cannot be said for hardware failure, which may cause some protections to be countered.
 
-\todo[inline]{add exemple ?}
+\todo[inline]{add example?}
 
 
 \subsection{Contribution}
  
-The purpose of this report is to show how Rust differ with C and C++ regarding offensive fault injection.
-To answer that there three different part :
+The purpose of this report is to show how Rust differs from C and C++ regarding offensive fault injection.
+To answer that, there are three different parts:
 
 \begin{itemize}
-    \item \textbf{Extand Lazart to support Rust}
-    \item \textbf{Porting the FISSC benchmark to Rust}
-    \item \textbf{Analyzing idiomatic Rust}
+\item \textbf{Extend Lazart to support Rust}
+\item \textbf{Porting the FISSC benchmark to Rust}
+\item \textbf{Analyzing idiomatic Rust}
 \end{itemize}
 
-\todo[inline]{explain more ?}
+\todo[inline]{explain more?}
 
 %Originally, Lazart only supported C code, but support for Rust is now being implemented. 
 %In previous work, a countermeasure benchmark was implemented and evaluated in C \cite{dureuil2016}.

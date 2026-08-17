@@ -1,48 +1,48 @@
-In this section we talk about related work and a description of lazart tool.
+In this section, we talk about related work and a description of the Lazart tool.
 \subsection{Fault injection}
-Fault injection is an old, well-studied attack models in security and cryptology that can be created at hardware or software level\cite{liu2025}.
-While multiple methods exist multiple methods to simulate fault injection, one approach involves hardware-based techniques, such as \cite{Richter-Brockmann2021,Arribas2020}. 
+Fault injection is an old, well-studied attack model in security and cryptology that can be created at the hardware or software level \cite{liu2025}.
+While multiple methods exist to simulate fault injection, one approach involves hardware-based techniques, such as \cite{Richter-Brockmann2021,Arribas2020}. 
 Another method to simulate fault injection is using software tools \cite{Lazart2015,Riviere2014}. 
-One sush software tool is called Lazart \cite{Lazart2015}.
+One such software tool is called Lazart \cite{Lazart2015}.
 A countermeasure benchmark, developed using the Lazart tool by several researchers, is FISSC \cite{dureuil2016}.  
 
-While a few studies have been conducted on countermeasures in Rust \cite{21Kim2026ICCE,22Sini2025DATE} ,there is little research that has been conducted on comparing the results between C and Rust for countermeasures.
+While a few studies have been conducted on countermeasures in Rust \cite{21Kim2026ICCE,22Sini2025DATE}, there is little research that has been conducted on comparing the results between C and Rust for countermeasures.
 
-Furthermore, little research has been done on the effectiveness of the protecting of the countermesure from compiler optimisations.
+Furthermore, little research has been done on the effectiveness of the protection of the countermeasure from compiler optimizations.
 We addressed this gap by highlighting the work of Sébastien Michelland \cite{23miche2025}.
 
-\subsection{Lazart tools}
+\subsection{Lazart tool}
 \label{subsec:Lazart}
 \begin{figure*}
-    \centering
-    \includegraphics{image/lazart-arch.png}
-    \caption{Lazart tool arkitecture}
-    \label{figure_0:Lazart}
+\centering
+\includegraphics{image/lazart-arch.png}
+\caption{Lazart tool architecture}
+\label{figure_0:Lazart}
 \end{figure*}
 
-Lazart \cite{Lazart2015} is a high level fault injection tool.
-Has been develop by Verimag since 2015.
-It allows to identifying vulnerable paths in code and can be used to evaluate the accuracy of countermeasures against a given fault model and a security property.
+Lazart \cite{Lazart2015} is a high-level fault injection tool.
+It has been developed by Verimag since 2015.
+It allows for identifying vulnerable paths in code and can be used to evaluate the accuracy of countermeasures against a given fault model and a security property.
 Unlike other similar tools, Lazart is one of the few that are capable of performing multi-fault attacks.
-Lazart is able to analyse C or C++ code by compiling it using the Clang compiler.
-They use one of the features of Clang to generate LLVM bitecode (which is Intermediate code).\\
-LLVM is a middle component of the compiler and is designed for compile-time, link-time and run-time optimisation.
+Lazart is able to analyze C or C++ code by compiling it using the Clang compiler.
+It uses one of the features of Clang to generate LLVM bytecode (which is intermediate code).\\
+LLVM is a middle component of the compiler and is designed for compile-time, link-time, and run-time optimization.
 The LLVM framework is run by Clang after the frontend pipeline is completed.
 
-Lazart is composed of five step:
+Lazart is composed of five steps:
 \begin{enumerate}[noitemsep,leftmargin=0em,wide]
-\item Preprocessing and compilation of the input code.
-\item Mutation of the code with Wolverine.
-\item Dynamic-Symbolic Execution with KLEE \cite{24Cadar2008KLEEUA,25kleeseKLEE}.
-\item Trace parsing from KLEE's outputs.
-\item Analysis.
+    \item Preprocessing and compilation of the input code.
+    \item Mutation of the code with Wolverine.
+    \item Dynamic-Symbolic Execution with KLEE \cite{24Cadar2008KLEEUA,25kleeseKLEE}.
+    \item Trace parsing from KLEE's outputs.
+    \item Analysis.
 \end{enumerate}
 
 Lazart can support 4 fault models:
 \begin{itemize}[noitemsep,leftmargin=0em,wide]
     \item Test inversion (modification of the evaluation of a branch condition);
-    \item data mutation (modification of the loaded values);
-    \item instruction skip;
+    \item Data mutation (modification of the loaded values);
+    \item Instruction skip;
     \item Call another function (function switch);
 \end{itemize}
 
@@ -50,23 +50,23 @@ Lazart can support 4 fault models:
 
 \subsection{Rust Language}
 Rust is a general-purpose programming language which emphasizes performance, type safety, concurrency, and memory safety.
-Rust has is first version released in 2006.
-One of features of rust is the way hwo it handle the memory safety and concurrency of a program.
-Unlike other language who use a garbage colector, Rust use a "barrow checker" that track the life spand of a variable as there owner.
-And deal with data races. 
+Rust had its first version released in 2006.
+One of the features of Rust is the way how it handles the memory safety and concurrency of a program.
+Unlike other languages which use a garbage collector, Rust uses a "borrow checker" that tracks the lifespan of a variable as its owner.
+And deals with data races. 
 
-\subsubsection{Why using Rust ?}
-We give several reason of using rust: 
+\subsubsection{Why use Rust?}
+We give several reasons for using Rust: 
 \begin{itemize}
-    \item Rust use the same LLVM as clang does in C/C++. So it make Rust compatible with lazart.
-    \item Rust is a recent,still updated programming language.
-    \item Rust is used for embeded system.
+    \item Rust uses the same LLVM as clang does in C/C++. So it makes Rust compatible with Lazart.
+    \item Rust is a recent, still updated programming language.
+    \item Rust is used for embedded systems.
 \end{itemize}
 
 \subsubsection{The usage of no\_std}
-One point that need to be explain on this reporte is the flag no\_std.
-Using no\_std attribute stops the compiler from linking std into the crate, and only links core.
-It limit :
+One point that needs to be explained in this report is the flag no\_std.
+Using the no\_std attribute stops the compiler from linking std into the crate, and only links core.
+It limits:
 \begin{itemize}
     \item Heap allocation.
     \item File I/O, threading, and networking.
