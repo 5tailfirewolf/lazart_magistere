@@ -1,4 +1,4 @@
-\label{result section}
+\label{Section:result section}
 In this section, we first present the results obtained for the \texttt{memcmps} code.\\
 Next, we show the results for the \texttt{verify\_pin} code.\\
 Finally, we discuss the findings related to the control-flow graph generated during the analysis.
@@ -57,7 +57,6 @@ The last column "Countermeasures" enumerates the protection used for each versio
         \item \textit{DT} : double test
         \item \textit{SC} : step counter
 \end{itemize}
-\todo[inline]{explain different value}
 
 In the VP0 example, we observe 8 missing attacks when we compare to the C result. Since VP0 doesn't have hardened boolean, so it uses regular boolean, \texttt{rustc} reuse the branch condition in the \texttt{verify\_pin} function, through XOR operations, to compute its return value, reducing the number of observable injection points on that path. All the higher-order attacks are redundant with those 8 one fault attacks.
 

@@ -20,21 +20,26 @@ While the borrow checker protects against bad access of data in the software pro
 
 The same cannot be said for hardware failure, which may cause some protections to be countered.
 
-\todo[inline]{add example?}
+\todo[inline]{section 2.2 :Si tu veux plus parler du borrow-checker alors tu peux prendre l'exemple
+   de Tommy (échange de pointeurs) du papier FDTC. Tu peux aussi faire réference à la section 4 qui détaille cet exemple ...,ref FDTC ?}
 
+We can take the buffer overflows of a table rust protection as an example.
+\texttt{rustc} will add a test on the code at compile time, to identify if you reading in or out the table, and will launch a pannic if it's outside the range of the table.
+injected a faute at the moment of the condition can allow the program to read outside the table, and thus counter the protection set by Rust language itself.
+
+An other example, is the change pointer fault. It is explained in the subsection \ref{subsection:Change Pointer fault model}.
 
 \subsection{Contribution}
  
 The purpose of this report is to show how Rust differs from C and C++ regarding offensive fault injection.
-To answer that, there are three different parts:
+To answer that, there are two different parts:
 
 \begin{itemize}
-\item \textbf{Extend Lazart to support Rust}
-\item \textbf{Porting the FISSC benchmark to Rust}
-\item \textbf{Analyzing idiomatic Rust}
+\item \textbf{Extend Lazart to support Rust}: discussed in section \ref{Section:Rust ported}, this shows the instructions that have to be added in order to analyze Rust programs without losing attacks. In addition, we also discuss the change pointer fault in this section.
+\item \textbf{Porting the FISSC benchmark to Rust}: this point discusses FISSC (Fault Injection and Simulation Secure Collection) \cite{dureuil2016}. We analyze two programs of FISSC in Rust and C and compare them to each other. See section \ref{Section:FISSC}
 \end{itemize}
 
-\todo[inline]{explain more?}
+The report is organized as follows. Section \ref{Section:Related_work} presents the Rust programming language, related work concerning Rust and fault injection, and the tool Lazart. Section \ref{Section:Rust ported} describes the extension of Lazart to support the Rust language and the addition of a new attack model for C and Rust languages. Section \ref{Section:CFG} presents a new option of the Lazart tool giving the possibility to generate a control flow graph (CFG). Section \ref{Section:FISSC} shows the comparison made on the FISSC benchmark and a Rust implementation designed to match the C implementation's attack surface. Section \ref{Section:result section} shows results for the FISSC comparison of a Rust implementation, and findings that were produced from control flow graph analysis. And finally, Section \ref{section:Conclusion} summarizes and proposes some perspectives to this work.
 
 %Originally, Lazart only supported C code, but support for Rust is now being implemented. 
 %In previous work, a countermeasure benchmark was implemented and evaluated in C \cite{dureuil2016}.

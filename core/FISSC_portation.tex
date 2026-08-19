@@ -1,11 +1,12 @@
-\todo[inline]{REDO this section introduction}
-\label{FISSC}
-We contributed to Lazart in order to implement the Rust language in the system and find a way to evaluate and compare the results produced by Lazart.
+\label{Section:FISSC}
+FISSC\footnote{FISSC hyperlink: \href{https://hal.science/hal-03784107v1/file/article-fissc.pdf}{https://hal.science/hal-03784107v1/file/article-fissc.pdf}} (Fault Injection and Simulation Secure Collection) is a public code collection dedicated to the analysis of code robustness against fault injection attacks. It contains two pieces of code that we will discuss in this section:
+\begin{itemize}
+\item The first code evaluated is \texttt{verify\_pin}, a program used to validate a PIN code on a PIN pad.
+\item The second code is \texttt{memcmps}, a secure version of \texttt{memcmp}.
+\end{itemize}
+Originally written in C, both code segments were ported to Rust, following a C-style programming approach, and were subsequently examined using Lazart. Then, each code in both languages was analyzed and compared.
+In addition to the comparison, we have also written a more idiomatic version of the FISSC collection.
 
-We evaluated two different pieces of code to see the differences in attacks detected by Lazart.
-The first code evaluated is \texttt{memcmps}, a secure version of \texttt{memcmp}.
-The second code is \texttt{verify\_pin}, a program used to validate a PIN code on a PIN pad.
-We used control-flow graphs to understand the difference between C and Rust compiled code and to understand what happened during the compilation and mutation of the code.
 %--------------------------------------------------------------verifypin--------------------------------------------------------------------------------
 \subsection{\textit{verifypin} collection}
 
@@ -47,12 +48,7 @@ The attack model used is the \textbf{test inversion}.
 
 We implemented the Rust version of the source code shown in Figure \ref{figure 3 : verifypin_C}, following the style used by C programmers (see Figure \ref{figure 4 : verifypin_Rust}).
 
-\begin{figure}[ht]
-    \centering
-    \fbox{\includegraphics[scale=0.35]{image/verify_pin_0_Rust.png}}
-    \caption{Verification of PIN code in Rust}
-    \label{figure 4 : verifypin_Rust}
-\end{figure}
+
 
 %--------------------------------------------------------------memcmps--------------------------------------------------------------------------------
 \subsection{\textit{memcmps} collection}
@@ -63,6 +59,14 @@ We implemented the Rust version of the source code shown in Figure \ref{figure 3
     \caption{Securised version of memcmp in C}
     \label{figure 1:memcmps_C}
 \end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \fbox{\includegraphics[scale=0.35]{image/verify_pin_0_Rust.png}}
+    \caption{Verification of PIN code in Rust}
+    \label{figure 4 : verifypin_Rust}
+\end{figure}
+
 The first example code implemented in Rust is \texttt{memcmps}.\\
 \texttt{memcmps} is a secure version of  \texttt{memcmp}  that is available in C.\\
 
@@ -119,8 +123,8 @@ We also used two flags for compiling Rust:
 In memcmps programs, the data load(DL) faults are directly instrumented in the program (using \texttt{mut\_dl\_sym!} macro), instead of being specified by variable name. That prevent the propagation of the \texttt{len} value in SSA,
 which the DL model applies. This also prevents the constant folding for result that is reduced to a selection of constants depending on the execution path. Thus, direct calls to the DL mutation macro are made on each DL injection point.
 %-------------------------------------idiomatic-Rust-----------------------------------------------------------
-\subsection{The Rust FISSC collection}
-\todo[inline]{Complete}
+\subsection{A Rust version FISSC}
+\todo[inline]{I or we ?}
 I developed an idiomatic version of FISSC in Rust. The idiomatic version contain both previous examples, \texttt{verify\_pin} and \texttt{memcmps}.
 Unlike the two previous examples, the goal is not to match one-to-one the C implementation but to provide a collection of code that can be reused with other formal-methods or simulation tools, or on another representation level.
 In addition to the idiomatic Rust versions of \texttt{verify\_pin} and \texttt{memcmps} collections, we ported the remaining programs of FISSC to Rust.

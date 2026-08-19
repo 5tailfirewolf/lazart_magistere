@@ -1,0 +1,8 @@
+\textbf{The Rust programming language \cite{27RustMatsakis} is rapidly being adopted in safety- and security-critical software. Its compile-time guarantees, thanks to borrow checking and some other language constructs — exhaustive pattern matching, mandatory error handling through \texttt{Option} and \texttt{Result}, and automatic bounds check — eliminate entire classes of memory-safety vulnerabilities that have plagued C and C++ for decades.}
+
+\textbf{Fault injection is a critical security concern that can cause hardware to malfunction or be exploited by attackers. Rust is not protected from fault injection, as most of its protections are made at compile time and can be faulted during runtime.
+That is why tools like Lazart are essential for identifying faults and evaluating code—including C and Rust—to protect systems from such vulnerabilities.}
+
+\textbf{In this study, we extend the tool Lazart \cite{Lazart2015} to support the Rust language by updating its LLVM backend in order to support the pipeline of \texttt{cargo} and \texttt{rustc}, and by adding a new attack model giving Lazart the ability to change the address of a pointer during execution. A new option has been added to the Lazart tool giving the ability to generate a control flow graph of the compiled code or its mutated version.
+Finally, we ported the FISSC fault injection collection from C to Rust and provided a more Rust-idiomatic version of the collection.
+The results section covers the findings of FISSC and evaluates the impact of the new control flow graph generator. It highlights that Rust and C diverge both in design and in their approach to control flow by utilizing instructions typically reserved for pattern matching.}

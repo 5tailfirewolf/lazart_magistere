@@ -66,8 +66,8 @@
 
 %---------------------------Introduction---------------------------
 \section{Abstract}
-%\input{introduction/Abstract.tex}
 \todo[inline]{Remade Abstract}
+\input{introduction/Abstract.tex}
 \section{Introduction}
 \input{introduction/introduction}
 
@@ -83,7 +83,7 @@
 \section{CFG}
 \input{core/CFG_Rust.tex}
 
-\section{Portation FISSC for lazart}
+\section{Rewritting FISSC in Rust}
 %\todo[inline]{Add discovery of rust ralated problem in rust + Redo the contribut not enough clear + add feature readded (graph normal and mutated)}
 \input{core/FISSC_portation.tex}
 
@@ -93,6 +93,24 @@
 \input{core/result.tex}
 \section{Conclusion}
 \input{core/conclusion_limit}
+\section*{\textbf{Disclaimer on the Report}}
+
+This report builds upon prior work, including:
+\begin{enumerate}
+    \item An earlier report written during my \textbf{M1 MOSIG} internship.
+    \item The upcoming article \textbf{FDTC} (\cite{fdct2026}), which is currently \textbf{under submission} for peer review.
+\end{enumerate}
+
+While this report primarily highlights my personal contributions to the project, it is important to acknowledge that the broader research effort involves multiple collaborators. In particular, the development of Lazart’s core architecture and the Rust port were made possible through the collective work of:
+- Laurent Mounier and Etienne Boespflug, Internship tutor and main research on Lazart tool.
+- Tommy Pradt, another research student, who focused on the Rust port of the core of Lazart and the development of idiomatic Rust attack surface examples (contribution present on \textbf{FDTC}).
+
+---
+
+\section*{\textbf{Acknowledgments}}
+I would like to express my sincere gratitude to \textbf{Tommy Pradt} for his essential contributions to the \textbf{core architecture of Lazart}, which were instrumental in enabling the Rust port and the development of idiomatic Rust attack surface examples involving the borrow checker.
+
+---
 \onecolumn
 \section{Reference}
 \printbibliography[heading=none]
