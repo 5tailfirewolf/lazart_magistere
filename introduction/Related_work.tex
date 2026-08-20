@@ -9,8 +9,8 @@ A countermeasure benchmark, developed using the Lazart tool by several researche
 
 While a few studies have been conducted on countermeasures in Rust \cite{21Kim2026ICCE,22Sini2025DATE}, there is little research that has been conducted on comparing the results between C and Rust for countermeasures.
 
-Furthermore, little research has been done on the effectiveness of the protection of the countermeasure from compiler optimizations.
-We addressed this gap by highlighting the work of Sébastien Michelland \cite{23miche2025}.
+%Furthermore, little research has been done on the effectiveness of the protection of the countermeasure from compiler optimizations.
+%We addressed this gap by highlighting the work of Sébastien Michelland \cite{23miche2025}.
 
 \subsection{Lazart tool}
 \label{subsec:Lazart}
@@ -51,9 +51,9 @@ Rust is a general-purpose programming language which emphasizes performance, typ
 Rust had its first version released in 2006.
 One of the features of Rust is the way how it handles the memory safety and concurrency of a program.
 Unlike other languages which use a garbage collector, Rust uses a "borrow checker" that tracks the lifespan of a variable as its owner.
-And deals with data races. 
+And resolve concurrency access to global variable. 
 
-\subsubsection{Why use Rust?}
+\subsubsection{Why using Rust?}
 We give several reasons for using Rust: 
 \begin{itemize}
     \item Rust uses the same LLVM as clang does in C/C++. So it makes Rust compatible with Lazart.
