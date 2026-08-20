@@ -1,4 +1,9 @@
 \documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{Green}{rgb}{0.0,0.5,0.0}
+\definecolor{colString}{rgb}{0.6,0.0,0.4}
 \usepackage{todonotes}
 \usepackage[utf8]{inputenc}       % Encodage UTF-8
 \usepackage[T1]{fontenc}          % Meilleure gestion des polices
@@ -20,7 +25,81 @@
 % multicol
 \usepackage{multicol}
 
-% biblio
+% biblio lst
+\lstdefinelanguage{Rust}{
+  keywords={as,async,await,break,const,continue,crate,dyn,else,enum,extern,fn,for,
+            if,impl,in,let,loop,match,mod,move,mut,pub,ref,return,self,Self,static,
+            struct,super,trait,type,unsafe,use,where,while},
+  morekeywords=[2]{bool,char,str,i8,i16,i32,i64,i128,isize,u8,u16,u32,u64,u128,usize,
+                   f32,f64,Option,Result,Vec,String,true,false},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]{"},
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  backgroundcolor=\color{gray!3},
+  keywordstyle=\bfseries\color{blue},
+  keywordstyle=[2]\itshape\color{teal},
+  commentstyle=\itshape\color{Green},
+  stringstyle=\color{colString},
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  breakatwhitespace=true,
+  breakindent=2em,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=0.5\baselineskip,
+  belowskip=0.5\baselineskip,
+}
+
+
+% Listings
+\lstdefinestyle{base}{
+    language=C,
+    basicstyle=\ttfamily\footnotesize\color{black},
+    emptylines=1,
+    breaklines=true,
+    moredelim=**[is][\color{red}]{µ}{µ},
+    moredelim=**[is][\color{teal}]{§}{§},
+    moredelim=**[is][\color{orange}]{£}{£},
+}
+
+\lstdefinestyle{codeC}{
+    language		={C},
+    morekeywords	={byte,ADD},
+    basicstyle	=\ttfamily\footnotesize, 
+    backgroundcolor=\color{gray!3},
+    identifierstyle=\color{black}, 
+    keywordstyle	=\color{blue}, 
+    stringstyle	=\color{colString}, 
+    commentstyle	=\color{Green}, 
+    columns		=flexible,
+    keepspaces	=true,
+    escapeinside	={\%*}{*)},
+    tabsize		=4,
+    frameround	=tttt,
+    extendedchars=true,
+    showspaces	=false,
+    showstringspaces=false,
+    numbers		=left,
+    numbersep	=5pt,
+    numbersep	=10pt,
+    xleftmargin	=12pt,
+    numberstyle	=\tiny,
+    breaklines	=true,
+    breakautoindent=true, 
+    captionpos	=b,
+    morekeywords={int8_t, uint8_t, size_t, uint8_t, int8_t, int32_t, uint32_t, bool, BOOL, true, false, uint}
+}
+
 
 % figure
 \usepackage{graphicx}

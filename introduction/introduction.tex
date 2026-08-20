@@ -19,9 +19,8 @@ Rust has stronger protection over memory access and concurrency over variables; 
 While the borrow checker protects against bad access of data in the software program. 
 
 The same cannot be said for hardware failure, which may cause some protections to be countered.
-
-\todo[inline]{section 2.2 :Si tu veux plus parler du borrow-checker alors tu peux prendre l'exemple
-   de Tommy (échange de pointeurs) du papier FDTC. Tu peux aussi faire réference à la section 4 qui détaille cet exemple ...,ref FDTC ?}
+An example of such failure is given in subsection \ref{subsection:Change Pointer fault model} of section \ref{Section:Rust ported}.
+Subsection \ref{subsection:Change Pointer fault model} is only a summary of the full version discussed in the FDTC paper (under submission) \cite{fdct2026}. 
 
 We can take the buffer overflows of a table rust protection as an example.
 \texttt{rustc} will add a test on the code at compile time, to identify if you reading in or out the table, and will launch a pannic if it's outside the range of the table.
