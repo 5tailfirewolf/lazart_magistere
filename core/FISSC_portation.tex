@@ -124,8 +124,7 @@ In memcmps programs, the data load(DL) faults are directly instrumented in the p
 which the DL model applies. This also prevents the constant folding for result that is reduced to a selection of constants depending on the execution path. Thus, direct calls to the DL mutation macro are made on each DL injection point.
 %-------------------------------------idiomatic-Rust-----------------------------------------------------------
 \subsection{A Rust version FISSC}
-\todo[inline]{I or we ?}
-I developed an idiomatic version of FISSC in Rust. The idiomatic version contain both previous examples, \texttt{verify\_pin} and \texttt{memcmps}.
+we developed an idiomatic version of FISSC in Rust. The idiomatic version contain both previous examples, \texttt{verify\_pin} and \texttt{memcmps}.
 Unlike the two previous examples, the goal is not to match one-to-one the C implementation but to provide a collection of code that can be reused with other formal-methods or simulation tools, or on another representation level.
 In addition to the idiomatic Rust versions of \texttt{verify\_pin} and \texttt{memcmps} collections, we ported the remaining programs of FISSC to Rust.
 We briefly describe here the CRT-RSA, AES and GetChallenge programs from FISSC.
